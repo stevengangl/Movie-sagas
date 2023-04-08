@@ -26,7 +26,7 @@ return (
     <img src={movieId.poster}/>
     <p>{movieId.description}</p>
     {/* movie genres here, need to join tables to do this  */}
-    {movieId.title}
+    {/* {movieGenre} */}
 </div>
 </>
 )

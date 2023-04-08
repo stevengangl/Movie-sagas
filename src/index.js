@@ -16,7 +16,21 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     //getting movie info from client side 
     yield takeEvery('POST_MOVIE_INFO', postMovieInfo)
+
+    //getting movieGenre info
+    yield takeEvery('MOVIE_GENRE', postMovieGenre)
 }
+
+//need to get movie genre relations
+function* postMovieGenre(action){
+    try{
+        const genres = yield axios.get('api/genre');
+        console.log('trying to get genres', genres.data)
+        yield put({ type: 'SET_GENRES', payload: genres.data})
+    }catch(error){
+        console.log('error in index')
+    }
+};
 
 //need to get movie id from client side movielist
 function* postMovieInfo(action){

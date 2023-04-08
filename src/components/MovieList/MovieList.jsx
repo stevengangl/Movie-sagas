@@ -22,8 +22,12 @@ function MovieList() {
         setMovieInfo(id)
         console.log('looking at movieInfo ID:', movieInfo)
         dispatch({
-            type: 'POST_MOVIE_INFO',
+            type: 'POST_MOVIE_INFO', 
             payload:  id
+        });
+        dispatch({
+            type: 'MOVIE_GENRE', 
+           
         });
         history.push('/moviedetails')
 
