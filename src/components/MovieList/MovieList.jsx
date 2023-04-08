@@ -27,6 +27,7 @@ function MovieList() {
         });
         dispatch({
             type: 'MOVIE_GENRE', 
+            payload:  id
            
         });
         history.push('/moviedetails')

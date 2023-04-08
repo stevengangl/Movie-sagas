@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 function MovieDetails() {
 
-    const dispatch = useDispatch();
     const history = useHistory();
 
     const movieId = useSelector(store => store.single)
@@ -26,7 +25,9 @@ return (
     <img src={movieId.poster}/>
     <p>{movieId.description}</p>
     {/* movie genres here, need to join tables to do this  */}
-    {/* {movieGenre} */}
+    {movieGenre.map(genre => (
+        <div key={genre.genres_id}>{genre.genre}</div>
+    ))}
 </div>
 </>
 )

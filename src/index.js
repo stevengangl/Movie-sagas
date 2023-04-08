@@ -18,13 +18,14 @@ function* rootSaga() {
     yield takeEvery('POST_MOVIE_INFO', postMovieInfo)
 
     //getting movieGenre info
-    yield takeEvery('MOVIE_GENRE', postMovieGenre)
+    yield takeEvery('MOVIE_GENRE', getMovieGenre)
 }
 
 //need to get movie genre relations
-function* postMovieGenre(action){
+function* getMovieGenre(action){
     try{
-        const genres = yield axios.get('api/genre');
+        console.log('action.payload id:', action.payload.id)
+        const genres = yield axios.get(`api/genre/${action.payload.id}`);
         console.log('trying to get genres', genres.data)
         yield put({ type: 'SET_GENRES', payload: genres.data})
     }catch(error){
@@ -83,6 +84,7 @@ const movies = (state = [], action) => {
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
+            console.log(action.payload)
             return action.payload;
         default:
             return state;
