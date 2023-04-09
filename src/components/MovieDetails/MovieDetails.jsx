@@ -6,11 +6,11 @@ function MovieDetails() {
     const history = useHistory();
 
     const movieId = useSelector(store => store.single)
-    const movies = useSelector(store => store.movies)
+    // const movies = useSelector(store => store.movies)
     const movieGenre = useSelector(store => store.genres)
 
     console.log('movie info ', movieId);
-    console.log('movies', movies);
+    // console.log('movies', movies);
     
     function goBack(){
         history.push('/movielist')

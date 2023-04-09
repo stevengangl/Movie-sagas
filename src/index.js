@@ -15,8 +15,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     //getting movie info from client side 
-    yield takeEvery('POST_MOVIE_INFO', postMovieInfo)
-
+    yield takeEvery('GET_MOVIE_INFO', getMovieInfo)
     //getting movieGenre info
     yield takeEvery('MOVIE_GENRE', getMovieGenre)
 }
@@ -26,20 +25,20 @@ function* getMovieGenre(action){
     try{
         console.log('action.payload id:', action.payload.id)
         const genres = yield axios.get(`api/genre/${action.payload.id}`);
-        console.log('trying to get genres', genres.data)
-        yield put({ type: 'SET_GENRES', payload: genres.data})
+        // console.log('trying to get genres', genres.data)
+        yield put({ type: 'GET_GENRES', payload: genres.data})
     }catch(error){
         console.log('error in index')
     }
 };
 
 //need to get movie id from client side movielist
-function* postMovieInfo(action){
+function* getMovieInfo(action){
     try{                     //action.payload is the id
-        console.log('looking at action.payload:', action.payload)
-        yield put ({ type: 'SET_SINGLE', payload: action.payload })
+        // console.log('looking at action.payload:', action.payload)
+        yield put ({ type: 'GET_SINGLE', payload: action.payload })
     }catch(error) {
-        console.log(error)
+        // console.log(error)
     }
 }
 
@@ -47,8 +46,8 @@ function* fetchAllMovies() {
     // get all movie from the DB
     try {
         const movies = yield axios.get('/api/movie');
-        console.log('get all:', movies.data);
-        yield put({ type: 'SET_MOVIES', payload: movies.data });
+        // console.log('get all:', movies.data);
+        yield put({ type: 'GET_MOVIES', payload: movies.data });
 
     } catch {
         console.log('get all error');
@@ -59,10 +58,10 @@ function* fetchAllMovies() {
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
-// Used to individual movie 
+// Used to store individual movie 
 const single = (state = [], action) => {
     switch (action.type) {
-        case 'SET_SINGLE':
+        case 'GET_SINGLE':
             return action.payload;
         default:
             return state;
@@ -72,7 +71,7 @@ const single = (state = [], action) => {
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
     switch (action.type) {
-        case 'SET_MOVIES':
+        case 'GET_MOVIES':
             console.log('state:',state)
             return action.payload;
         default:
@@ -83,7 +82,7 @@ const movies = (state = [], action) => {
 // Used to store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
-        case 'SET_GENRES':
+        case 'GET_GENRES':
             console.log(action.payload)
             return action.payload;
         default:

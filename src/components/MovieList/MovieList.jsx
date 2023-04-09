@@ -22,7 +22,7 @@ function MovieList() {
         setMovieInfo(id)
         console.log('looking at movieInfo ID:', movieInfo)
         dispatch({
-            type: 'POST_MOVIE_INFO', 
+            type: 'GET_MOVIE_INFO', 
             payload:  id
         });
         dispatch({

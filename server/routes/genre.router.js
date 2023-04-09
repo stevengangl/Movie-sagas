@@ -4,7 +4,7 @@ const pool = require('../modules/pool')
 
 router.get('/:id', (req, res) => {
   // Add query to get all genres
-  console.log('in router req.params',req.params.id)
+  console.log('in router req.params')
   const query = `
   SELECT movies.title, genres.name AS genre, movies.id, genres.id AS genres_id
   FROM movies
@@ -13,7 +13,7 @@ router.get('/:id', (req, res) => {
   WHERE movies.id = $1;`
   pool.query(query, [req.params.id])
     .then(result => {
-      console.log('in genreRouter', result.rows)
+      // console.log('in genreRouter', result.rows)
       res.send(result.rows);
     })
     .catch(error => {
@@ -26,17 +26,4 @@ router.get('/:id', (req, res) => {
 module.exports = router;
 
 
-// router.get('/', (req, res) => {
 
-//   const query = `SELECT * FROM movies ORDER BY "title" ASC`;
-//   pool.query(query)
-//     .then( result => {
-//       console.log('hello')
-//       res.send(result.rows);
-//     })
-//     .catch(err => {
-//       console.log('ERROR: Get all movies', err);
-//       res.sendStatus(500)
-//     })
-
-// });
