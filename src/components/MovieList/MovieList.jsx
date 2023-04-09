@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 function MovieList() {
 
-    const [movieInfo, setMovieInfo] = useState('');
+    // const [movieInfo, setMovieInfo] = useState('');
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
     const history = useHistory();
@@ -19,8 +19,8 @@ function MovieList() {
     
     const handleClick = (event, id) => {
         event.preventDefault();
-        setMovieInfo(id)
-        console.log('looking at movieInfo ID:', movieInfo)
+        // setMovieInfo(id)
+        // console.log('looking at movieInfo ID:', movieInfo)
         dispatch({
             type: 'GET_MOVIE_INFO', 
             payload:  id
